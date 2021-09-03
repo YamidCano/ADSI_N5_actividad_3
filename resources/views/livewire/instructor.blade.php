@@ -12,7 +12,6 @@
                             <th scope="col">nombre</th>
                             <th scope="col">correo</th>
                             <th scope="col">celular</th>
-                            <th scope="col">N Documento</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -30,9 +29,6 @@
                                 </td>
                                 <td>
                                     {{ $item->cel }}
-                                </td>
-                                <td>
-                                    {{ $item->ndocumento }}
                                 </td>
                                 <td>
                                     <div class="btn-group">
