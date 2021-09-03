@@ -70,13 +70,12 @@ class Apprentice extends Component
         $this->resetErrorBag();
         $this->resetValidation();
         $this->reset(['name', 'email', 'cel', 'ndocumento' ]);
-        $this->emitTO( 'activity.live-activity-table','render');
+        $this->emitTO( 'apprentice','render');
         $this->emit('alert', 'Registro creada sastifactoriamente');
     }
 
     public function edit(apprentices $apprentice)
     {
-        // $apprentice = apprentices::find($id);
         $this->apprentice_id = $apprentice->id;
         $this->name = $apprentice->name;
         $this->email = $apprentice->email;
@@ -106,7 +105,6 @@ class Apprentice extends Component
 
     public function view(apprentices $apprentice)
     {
-        // $apprentice = apprentices::find($id);
         $this->apprentice_id = $apprentice->id;
         $this->name = $apprentice->name;
         $this->email = $apprentice->email;
@@ -115,7 +113,7 @@ class Apprentice extends Component
     }
 
     public function cerrar(){
-        $this->emit('updateApprentices');
+        $this->emit('update');
         $this->reset(['name', 'email', 'cel', 'ndocumento' ]);
         $this->resetErrorBag();
         $this->resetValidation();
