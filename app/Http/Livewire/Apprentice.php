@@ -74,9 +74,9 @@ class Apprentice extends Component
         $this->emit('alert', 'Registro creada sastifactoriamente');
     }
 
-    public function edit($id)
+    public function edit(apprentices $apprentice)
     {
-        $apprentice = apprentices::find($id);
+        // $apprentice = apprentices::find($id);
         $this->apprentice_id = $apprentice->id;
         $this->name = $apprentice->name;
         $this->email = $apprentice->email;
@@ -104,9 +104,9 @@ class Apprentice extends Component
         $apprentice->delete();
     }
 
-    public function view($id)
+    public function view(apprentices $apprentice)
     {
-        $apprentice = apprentices::find($id);
+        // $apprentice = apprentices::find($id);
         $this->apprentice_id = $apprentice->id;
         $this->name = $apprentice->name;
         $this->email = $apprentice->email;

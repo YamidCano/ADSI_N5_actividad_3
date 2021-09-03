@@ -112,11 +112,11 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" wire:click="cerrar" data-dismiss="modal">
-                        {{ __('Close') }}
+                        Salir
                     </button>
                     <button type="button" class="btn btn-success" wire:click="save" wire:loading.attr="disabled"
                         wire:target="save" class="dasabled:opacity-25">
-                        {{ __('Create') }} <span wire:loading wire:target="save">{{ __('...') }}</span>
+                        Crear <span wire:loading wire:target="save">{{ __('...') }}</span>
                     </button>
                 </div>
             </div>
@@ -174,11 +174,11 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" wire:click="cerrar" data-dismiss="modal">
-                        {{ __('Close') }}
+                        Salir
                     </button>
                     <button type="button" class="btn btn-success" wire:click="update" wire:loading.attr="disabled"
                         wire:target="update" class="dasabled:opacity-25">
-                        {{ __('update') }} <span wire:loading wire:target="update">{{ __('...') }}</span>
+                        Actualizar <span wire:loading wire:target="update">{{ __('...') }}</span>
                     </button>
                 </div>
             </div>
@@ -237,7 +237,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" wire:click="cerrar" data-dismiss="modal">
-                        {{ __('Close') }}
+                        Salir
                     </button>
                 </div>
             </div>
