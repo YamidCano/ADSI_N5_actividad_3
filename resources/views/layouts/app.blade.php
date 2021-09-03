@@ -6,26 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     @livewireStyles
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
     <div class="container">
         <!-- Navbar -->
-        <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light  border-bottom"> <button class="navbar-toggler"
+                type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span
+                    class="navbar-toggler-icon"></span> </button>
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Bootstrap_logo.svg/2560px-Bootstrap_logo.svg.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
-              <span class="fs-4 ml-5">Bootstrap</span>
+                <img src="{{ asset('img') }}/logo.png" alt="" width="40" height="40"
+                    class="d-inline-block align-text-top mr-9">
+                <span class="fs-4 ml-2">APP ASISTENCIA</span>
             </a>
-            <ul class="nav nav-pills">
-              <li class="nav-item"><a href="{{route('registro')}}" class="nav-link active" aria-current="page">Registros</a></li>
-              <li class="nav-item"><a href="{{route('aprendices')}}" class="nav-link">aprendices</a></li>
-              <li class="nav-item"><a href="{{route('instructor')}}" class="nav-link">instructor</a></li>
-              <li class="nav-item"><a href="{{route('jornada')}}" class="nav-link">jornada</a></li>
-            </ul>
-          </header>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav nav-pills ml-md-auto">
+                    <li class="nav-item">
+                        <a href="{{ route('registro') }} " class="nav-link {{ Request()->is('/') ? 'active' : '' }}"
+                            aria-current="page">Registros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('aprendices') }}"
+                            class="nav-link {{ Request()->is('Aprendices') ? 'active' : '' }}">Aprendices</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('instructor') }}"
+                            class="nav-link {{ Request()->is('Instructor') ? 'active' : '' }}">Instructor</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('jornada') }}"
+                            class="nav-link {{ Request()->is('Jornada') ? 'active' : '' }}">Jornada</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
         <!-- End Navbar-->
         <div class="p-2 bd-highlight">
             <div class="container-fluid">
@@ -47,13 +66,25 @@
     </footer>
     <!-- End Footer-->
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
-        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
-        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous">
     </script>
     @livewireScripts
+
+    @stack('js')
+
+    <script>
+        Livewire.on('alert', function(message) {
+            Swal.fire(
+                '¡Buen trabajo!',
+                message,
+                'success'
+            )
+        });
+    </script>
 </body>
 
 </html>
