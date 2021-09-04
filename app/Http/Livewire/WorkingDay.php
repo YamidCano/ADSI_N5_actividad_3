@@ -8,12 +8,12 @@ use App\Models\working_day;
 
 class WorkingDay extends Component
 {
-    public $workingday, $name, $workingday_id ;
+    public $workingday, $name, $workingday_id, $search;
 
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     public $perPage = 5;
-    // public $queryString = ['search' => ['except' => '']];
+    public $queryString = ['search' => ['except' => '']];
 
     public $updateActivity = false;
     protected $listeners = ['destroyWorkingday'];
@@ -35,6 +35,7 @@ class WorkingDay extends Component
     public function render()
     {
         $workingdays = working_day::query()
+        ->where('name', 'like', "%{$this->search}%")
         ->paginate($this->perPage);
 
         return view('livewire.working-day', compact('workingdays'));

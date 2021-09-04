@@ -8,12 +8,12 @@ use Livewire\WithPagination;
 
 class Apprentice extends Component
 {
-    public $apprentice, $name, $email, $cel, $ndocumento, $apprentice_id ;
+    public $apprentice, $name, $email, $cel, $ndocumento, $apprentice_id, $search;
 
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     public $perPage = 5;
-    // public $queryString = ['search' => ['except' => '']];
+    public $queryString = ['search' => ['except' => '']];
 
     public $updateActivity = false;
     protected $listeners = ['destroyApprentices'];
@@ -38,6 +38,7 @@ class Apprentice extends Component
     public function render()
     {
         $apprentices = apprentices::query()
+        ->where('name', 'like', "%{$this->search}%")
         ->paginate($this->perPage);
 
         return view('livewire.apprentice', compact('apprentices'));

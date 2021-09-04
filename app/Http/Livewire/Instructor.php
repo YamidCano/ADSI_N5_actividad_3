@@ -8,12 +8,12 @@ use App\Models\instructors;
 
 class Instructor extends Component
 {
-    public $instructor, $name, $email, $cel, $instructor_id ;
+    public $instructor, $name, $email, $cel, $instructor_id, $search;
 
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     public $perPage = 5;
-    // public $queryString = ['search' => ['except' => '']];
+    public $queryString = ['search' => ['except' => '']];
 
     public $updateActivity = false;
     protected $listeners = ['destroyInstructor'];
@@ -37,6 +37,7 @@ class Instructor extends Component
     public function render()
     {
         $instructors = instructors::query()
+        ->where('name', 'like', "%{$this->search}%")
         ->paginate($this->perPage);
 
         return view('livewire.instructor', compact('instructors'));

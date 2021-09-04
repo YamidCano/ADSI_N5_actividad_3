@@ -1,7 +1,14 @@
 <div>
-    <button type="button" class="btn btn-primary mt-3 mb-3" data-toggle="modal" data-target="#Store">
-        Crear Aprendiz
-    </button>
+    <div class="d-flex bd-highlight">
+        <div class="p-2 bd-highlight">
+            <button type="button" class="btn btn-primary mt-3 mb-3" data-toggle="modal" data-target="#Store">
+                Crear Aprendiz
+            </button>
+        </div>
+        <div class="ml-auto p-2 bd-highlight">
+            <input class="form-control mr-sm-2 mt-2 mb-2" type="search" wire:model="search" placeholder="Buscar por nombre" aria-label="Search">
+        </div>
+    </div>
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
