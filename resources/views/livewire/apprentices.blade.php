@@ -21,6 +21,7 @@
                             <th scope="col">correo</th>
                             <th scope="col">celular</th>
                             <th scope="col">N Documento</th>
+                            <th scope="col">Ficha</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -41,6 +42,9 @@
                                 </td>
                                 <td>
                                     {{ $item->ndocumento }}
+                                </td>
+                                <td>
+                                    {{ $item->ficha->code }}
                                 </td>
                                 <td>
                                     <div class="btn-group">
@@ -102,18 +106,31 @@
                         <div class="row row-sm">
                             <div class="col-lg">
                                 <label for="Name">Celular *</label>
-                                <input type="text" class="form-control UpperCase" placeholder="Celular"
-                                    wire:model="cel" />
+                                <input type="text" class="form-control" placeholder="Celular" wire:model="cel" />
 
                                 @error('cel') <span class="text-danger error">{{ $message }}</span>@enderror
                             </div>
                             <div class="col-lg mg-t-10 mg-lg-t-0">
                                 <label for="Name">Numero Documeto *</label>
-                                <input type="number" class="form-control UpperCase" placeholder="Numero Documeto"
+                                <input type="number" class="form-control" placeholder="Numero Documeto"
                                     wire:model="ndocumento" />
 
                                 @error('ndocumento') <span
                                     class="text-danger error">{{ $message }}</span>@enderror
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row row-sm">
+                            <div class="col-lg">
+                                <label for="Name">Ficha *</label>
+                                <select class="custom-select" id="inputGroupSelect01" wire:model="ficha">
+                                    <option selected>Selecione una ficha.</option>
+                                    @foreach ($fichas as $item)
+                                        <option value="{{ $item->id }}">{{ $item->code }} - {{ $item->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('ficha') <span class="text-danger error">{{ $message }}</span>@enderror
                             </div>
                         </div>
                     </form>
@@ -138,7 +155,7 @@
             <div class="modal-content card">
                 <div class="modal-header">
                     <h5 class="mt-3 modal-title h4" id="update">
-                        Editar Aprendiz - {{$name}}
+                        Editar Aprendiz -
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" wire:click="cerrar"
                         aria-label="Close">
@@ -164,18 +181,31 @@
                         <div class="row row-sm">
                             <div class="col-lg">
                                 <label for="Name">Celular *</label>
-                                <input type="text" class="form-control UpperCase" placeholder="Celular"
-                                    wire:model="cel" />
+                                <input type="text" class="form-control" placeholder="Celular" wire:model="cel" />
 
                                 @error('cel') <span class="text-danger error">{{ $message }}</span>@enderror
                             </div>
                             <div class="col-lg mg-t-10 mg-lg-t-0">
                                 <label for="Name">Numero Documeto *</label>
-                                <input type="number" class="form-control UpperCase" placeholder="Numero Documeto"
+                                <input type="number" class="form-control" placeholder="Numero Documeto"
                                     wire:model="ndocumento" />
 
                                 @error('ndocumento') <span
                                     class="text-danger error">{{ $message }}</span>@enderror
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row row-sm">
+                            <div class="col-lg">
+                                <label for="Name">Ficha *</label>
+                                <select class="custom-select" id="inputGroupSelect01" wire:model="ficha">
+                                    <option selected>Selecione una ficha.</option>
+                                    @foreach ($fichas as $item)
+                                        <option value="{{ $item->id }}">{{ $item->code }} - {{ $item->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                @error('ficha') <span class="text-danger error">{{ $message }}</span>@enderror
                             </div>
                         </div>
                     </form>
@@ -238,6 +268,16 @@
                                 <div>
                                     <span class="h5">{{ $ndocumento }}</span>
                                 </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row row-sm">
+                            <div class="col-lg">
+                                <label for="Name">Ficha</label>
+                                <div>
+                                    <span class="h5">{{$fichacode}} - {{ $fichaname }}</span>
+                                </div>
+
                             </div>
                         </div>
                     </form>
