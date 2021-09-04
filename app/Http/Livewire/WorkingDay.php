@@ -14,8 +14,6 @@ class WorkingDay extends Component
     protected $paginationTheme = 'bootstrap';
     public $perPage = 5;
     public $queryString = ['search' => ['except' => '']];
-
-    public $updateActivity = false;
     protected $listeners = ['destroyWorkingday'];
 
     function rules() {

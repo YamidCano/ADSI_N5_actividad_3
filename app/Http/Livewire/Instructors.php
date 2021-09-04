@@ -3,27 +3,24 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\apprentices;
 use Livewire\WithPagination;
+use App\Models\instructor;
 
-class Apprentice extends Component
+class Instructors extends Component
 {
-    public $apprentice, $name, $email, $cel, $ndocumento, $apprentice_id, $search;
+    public $instructor, $name, $email, $cel, $instructor_id, $search;
 
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     public $perPage = 5;
     public $queryString = ['search' => ['except' => '']];
-
-    public $updateActivity = false;
-    protected $listeners = ['destroyApprentices'];
+    protected $listeners = ['destroyInstructor'];
 
     function rules() {
         return [
             'name' => 'required|min:3|max:256',
             'email' => 'required|min:3|max:50|email',
             'cel' => 'required|min:3|max:256',
-            'ndocumento' => 'required|min:3|max:256',
         ];
     }
 
@@ -37,11 +34,11 @@ class Apprentice extends Component
 
     public function render()
     {
-        $apprentices = apprentices::query()
+        $instructors = instructor::query()
         ->where('name', 'like', "%{$this->search}%")
         ->paginate($this->perPage);
 
-        return view('livewire.apprentice', compact('apprentices'));
+        return view('livewire.instructors', compact('instructors'));
     }
 
     // public function updatingSearch()
@@ -61,37 +58,34 @@ class Apprentice extends Component
 
     public function save(){
         $this->validate();
-        apprentices::create([
+        instructor::create([
             'name' => $this->name,
             'email' => $this->email,
             'cel' => $this->cel,
-            'ndocumento' => $this->ndocumento,
         ]);
         $this->emit('Store');
         $this->resetErrorBag();
         $this->resetValidation();
-        $this->reset(['name', 'email', 'cel', 'ndocumento' ]);
-        $this->emitTO( 'apprentice','render');
+        $this->reset(['name', 'email', 'cel' ]);
+        $this->emitTO( 'instructor','render');
         $this->emit('alert', 'Registro creada sastifactoriamente');
     }
 
-    public function edit(apprentices $apprentice)
+    public function edit(instructor $instructor)
     {
-        $this->apprentice_id = $apprentice->id;
-        $this->name = $apprentice->name;
-        $this->email = $apprentice->email;
-        $this->cel = $apprentice->cel;
-        $this->ndocumento = $apprentice->ndocumento;
+        $this->instructor_id = $instructor->id;
+        $this->name = $instructor->name;
+        $this->email = $instructor->email;
+        $this->cel = $instructor->cel;
     }
 
     public function update(){
         $this->validate();
-        $apprentice = apprentices::find($this->apprentice_id);
-        $apprentice->update([
+        $instructor = instructor::find($this->instructor_id);
+        $instructor->update([
             'name' => $this->name,
             'email' => $this->email,
             'cel' => $this->cel,
-            'ndocumento' => $this->ndocumento,
         ]);
         $this->emit('update');
         $this->resetErrorBag();
@@ -99,23 +93,22 @@ class Apprentice extends Component
         $this->emit('alert', 'Registro Actualizada sastifactoriamente');
     }
 
-    public function destroyApprentices(apprentices $apprentice)
+    public function destroyInstructor(instructor $instructor)
     {
-        $apprentice->delete();
+        $instructor->delete();
     }
 
-    public function view(apprentices $apprentice)
+    public function view(instructor $instructor)
     {
-        $this->apprentice_id = $apprentice->id;
-        $this->name = $apprentice->name;
-        $this->email = $apprentice->email;
-        $this->cel = $apprentice->cel;
-        $this->ndocumento = $apprentice->ndocumento;
+        $this->instructor_id = $instructor->id;
+        $this->name = $instructor->name;
+        $this->email = $instructor->email;
+        $this->cel = $instructor->cel;
     }
 
     public function cerrar(){
         $this->emit('update');
-        $this->reset(['name', 'email', 'cel', 'ndocumento' ]);
+        $this->reset(['name', 'email', 'cel']);
         $this->resetErrorBag();
         $this->resetValidation();
     }

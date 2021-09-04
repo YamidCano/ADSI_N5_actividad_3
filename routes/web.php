@@ -2,11 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Livewire\Apprentice;
-use App\Http\Livewire\Instructor;
+use App\Http\Livewire\Apprentices;
+use App\Http\Livewire\Instructors;
 use App\Http\Livewire\WorkingDay;
-use App\Http\Livewire\Registration;
+use App\Http\Livewire\Registrations;
 use App\Http\Livewire\DetailRegistration;
+use App\Http\Livewire\Fichas;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,8 +21,9 @@ use App\Http\Livewire\DetailRegistration;
 */
 
 
-Route::get('/Aprendices', Apprentice::class)->name('aprendices');
-Route::get('/Instructor', Instructor::class)->name('instructor');
-Route::get('/Jornada', WorkingDay::class)->name('jornada');
-Route::get('/', Registration::class)->name('registro');
+Route::get('/Aprendices', Apprentices::class)->name('Aprendices');
+Route::get('/Instructores', Instructors::class)->name('Instructores');
+Route::get('/Jornadas', WorkingDay::class)->name('Jornadas');
+Route::get('/Fichas', Fichas::class)->name('Fichas');
+Route::get('/', Registrations::class)->name('Registros');
 Route::get('/detail', DetailRegistration::class)->name('detail-registro');

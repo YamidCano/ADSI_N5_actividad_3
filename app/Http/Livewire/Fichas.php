@@ -4,25 +4,22 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Models\instructors;
+use App\Models\ficha;
 
-class Instructor extends Component
+class Fichas extends Component
 {
-    public $instructor, $name, $email, $cel, $instructor_id, $search;
+    public $ficha, $name,  $code, $ficha_id, $search;
 
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     public $perPage = 5;
     public $queryString = ['search' => ['except' => '']];
-
-    public $updateActivity = false;
-    protected $listeners = ['destroyInstructor'];
+    protected $listeners = ['destroyFichas'];
 
     function rules() {
         return [
             'name' => 'required|min:3|max:256',
-            'email' => 'required|min:3|max:50|email',
-            'cel' => 'required|min:3|max:256',
+            'code' => 'required|min:3|max:50',
         ];
     }
 
@@ -36,11 +33,11 @@ class Instructor extends Component
 
     public function render()
     {
-        $instructors = instructors::query()
+        $fichas = ficha::query()
         ->where('name', 'like', "%{$this->search}%")
         ->paginate($this->perPage);
 
-        return view('livewire.instructor', compact('instructors'));
+        return view('livewire.fichas', compact('fichas'));
     }
 
     // public function updatingSearch()
@@ -60,34 +57,31 @@ class Instructor extends Component
 
     public function save(){
         $this->validate();
-        instructors::create([
+        ficha::create([
             'name' => $this->name,
-            'email' => $this->email,
-            'cel' => $this->cel,
+            'code' => $this->code,
         ]);
         $this->emit('Store');
         $this->resetErrorBag();
         $this->resetValidation();
-        $this->reset(['name', 'email', 'cel' ]);
+        $this->reset(['name', 'code', ]);
         $this->emitTO( 'instructor','render');
         $this->emit('alert', 'Registro creada sastifactoriamente');
     }
 
-    public function edit(instructors $instructor)
+    public function edit(ficha $ficha)
     {
-        $this->instructor_id = $instructor->id;
-        $this->name = $instructor->name;
-        $this->email = $instructor->email;
-        $this->cel = $instructor->cel;
+        $this->ficha_id = $ficha->id;
+        $this->name = $ficha->name;
+        $this->code = $ficha->code;
     }
 
     public function update(){
         $this->validate();
-        $instructor = instructors::find($this->instructor_id);
-        $instructor->update([
+        $ficha = ficha::find($this->ficha_id);
+        $ficha->update([
             'name' => $this->name,
-            'email' => $this->email,
-            'cel' => $this->cel,
+            'code' => $this->code,
         ]);
         $this->emit('update');
         $this->resetErrorBag();
@@ -95,22 +89,21 @@ class Instructor extends Component
         $this->emit('alert', 'Registro Actualizada sastifactoriamente');
     }
 
-    public function destroyInstructor(instructors $instructor)
+    public function destroyFichas(ficha $ficha)
     {
-        $instructor->delete();
+        $ficha->delete();
     }
 
-    public function view(instructors $instructor)
+    public function view(ficha $ficha)
     {
-        $this->instructor_id = $instructor->id;
-        $this->name = $instructor->name;
-        $this->email = $instructor->email;
-        $this->cel = $instructor->cel;
+        $this->ficha_id = $ficha->id;
+        $this->name = $ficha->name;
+        $this->code = $ficha->code;
     }
 
     public function cerrar(){
         $this->emit('update');
-        $this->reset(['name', 'email', 'cel']);
+        $this->reset(['name', 'code']);
         $this->resetErrorBag();
         $this->resetValidation();
     }

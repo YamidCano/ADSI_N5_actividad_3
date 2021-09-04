@@ -27,20 +27,24 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav nav-pills ml-md-auto">
                     <li class="nav-item">
-                        <a href="{{ route('registro') }} " class="nav-link {{ Request()->is('/') ? 'active' : '' }}"
+                        <a href="{{ route('Registros') }} " class="nav-link {{ Request()->is('/') ? 'active' : '' }}"
                             aria-current="page">Registros</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('aprendices') }}"
+                        <a href="{{ route('Aprendices') }}"
                             class="nav-link {{ Request()->is('Aprendices') ? 'active' : '' }}">Aprendices</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('instructor') }}"
-                            class="nav-link {{ Request()->is('Instructor') ? 'active' : '' }}">Instructor</a>
+                        <a href="{{ route('Instructores') }}"
+                            class="nav-link {{ Request()->is('Instructores') ? 'active' : '' }}">Instructores</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('jornada') }}"
-                            class="nav-link {{ Request()->is('Jornada') ? 'active' : '' }}">Jornada</a>
+                        <a href="{{ route('Jornadas') }}"
+                            class="nav-link {{ Request()->is('Jornadas') ? 'active' : '' }}">Jornadas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('Fichas') }}"
+                            class="nav-link {{ Request()->is('Fichas') ? 'active' : '' }}">Fichas</a>
                     </li>
                 </ul>
             </div>
