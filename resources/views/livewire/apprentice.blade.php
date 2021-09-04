@@ -6,7 +6,8 @@
             </button>
         </div>
         <div class="ml-auto p-2 bd-highlight">
-            <input class="form-control mr-sm-2 mt-2 mb-2" type="search" wire:model="search" placeholder="Buscar por nombre" aria-label="Search">
+            <input class="form-control mr-sm-2 mt-2 mb-2" type="search" wire:model="search"
+                placeholder="Buscar por nombre" aria-label="Search">
         </div>
     </div>
     <div class="card">
@@ -108,8 +109,8 @@
                             </div>
                             <div class="col-lg mg-t-10 mg-lg-t-0">
                                 <label for="Name">Numero Documeto *</label>
-                                    <input type="number" class="form-control UpperCase" placeholder="Numero Documeto"
-                                        wire:model="ndocumento" />
+                                <input type="number" class="form-control UpperCase" placeholder="Numero Documeto"
+                                    wire:model="ndocumento" />
 
                                 @error('ndocumento') <span
                                     class="text-danger error">{{ $message }}</span>@enderror
@@ -137,7 +138,7 @@
             <div class="modal-content card">
                 <div class="modal-header">
                     <h5 class="mt-3 modal-title h4" id="update">
-                        Editar Aprendiz
+                        Editar Aprendiz - {{$name}}
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" wire:click="cerrar"
                         aria-label="Close">
@@ -170,8 +171,8 @@
                             </div>
                             <div class="col-lg mg-t-10 mg-lg-t-0">
                                 <label for="Name">Numero Documeto *</label>
-                                    <input type="number" class="form-control UpperCase" placeholder="Numero Documeto"
-                                        wire:model="ndocumento" />
+                                <input type="number" class="form-control UpperCase" placeholder="Numero Documeto"
+                                    wire:model="ndocumento" />
 
                                 @error('ndocumento') <span
                                     class="text-danger error">{{ $message }}</span>@enderror
@@ -214,7 +215,6 @@
                                 <div>
                                     <span class="h5">{{ $name }}</span>
                                 </div>
-
                             </div>
                             <div class="col-lg mg-t-10 mg-lg-t-0">
                                 <label for="Name">Correo Electronico</label>
@@ -251,19 +251,8 @@
         </div>
     </div>
 
-
     @push('js')
         <script type="text/javascript">
-            window.livewire.on('Store', () => {
-                $('#Store').modal('hide');
-            });
-        </script>
-        <script type="text/javascript">
-            window.livewire.on('update', () => {
-                $('#update').modal('hide');
-            });
-        </script>
-        <script>
             Livewire.on('remove', ID => {
                 Swal.fire({
                     title: '¿Estas seguro de eliminar?',

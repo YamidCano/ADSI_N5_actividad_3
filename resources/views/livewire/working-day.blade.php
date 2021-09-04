@@ -168,20 +168,8 @@
             </div>
         </div>
     </div>
-
-
     @push('js')
         <script type="text/javascript">
-            window.livewire.on('Store', () => {
-                $('#Store').modal('hide');
-            });
-        </script>
-        <script type="text/javascript">
-            window.livewire.on('update', () => {
-                $('#update').modal('hide');
-            });
-        </script>
-        <script>
             Livewire.on('remove', ID => {
                 Swal.fire({
                     title: '¿Estas seguro de eliminar?',

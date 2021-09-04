@@ -84,6 +84,14 @@
                 'success'
             )
         });
+
+        window.livewire.on('Store', () => {
+                $('#Store').modal('hide');
+            });
+
+            window.livewire.on('update', () => {
+                $('#update').modal('hide');
+            });
     </script>
 </body>
 
