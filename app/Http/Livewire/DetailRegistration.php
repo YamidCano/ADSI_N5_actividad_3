@@ -12,6 +12,7 @@ use App\Models\working_day;
 class DetailRegistration extends Component
 {
     public $registration_id, $registration_m, $registration_fn, $registration_fc, $registration_d, $registration_i, $registration_j, $registration_s;
+    public $registration_fid, $search;
     public $detailid;
 
     public function mount($detailid)
@@ -23,6 +24,7 @@ class DetailRegistration extends Component
       $apprentice = apprentice::find($Registration->id_monitor);
       $this->registration_m = $apprentice->name;
       $ficha = ficha::find($Registration->id_monitor);
+      $this->registration_fid = $ficha->id;
       $this->registration_fn = $ficha->name;
       $this->registration_fc = $ficha->code;
       $instructor = instructor::find($Registration->id_instructor);
@@ -31,12 +33,16 @@ class DetailRegistration extends Component
       $this->registration_j = $jornada->name;
       $this->registration_d = $Registration->date;
       $this->registration_s = $Registration->status;
-
     }
 
     public function render()
     {
+        $aprendices_f = apprentice::all()
+        // ->where('name', 'like', "%{$this->search}%");
+        ->where('id_ficha',  $this->registration_fid);
+
         $apprentices = apprentice::all();
-        return view('livewire.detail-registration', compact('apprentices'));
+
+        return view('livewire.detail-registration', compact('apprentices', 'aprendices_f'));
     }
 }
