@@ -25,6 +25,7 @@ class CreateRegistrationsTable extends Migration
             $table->date('date')->nullable();
             $table->unsignedBigInteger('id_jornada')->nullable();
             $table->foreign('id_jornada')->references('id')->on('working_days');
+            $table->integer('status')->nullable();
             $table->timestamps();
         });
     }

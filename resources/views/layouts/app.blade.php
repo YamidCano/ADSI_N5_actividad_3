@@ -16,7 +16,7 @@
 <body>
     <div class="container">
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light  border-bottom"> <button class="navbar-toggler"
+        <nav class="navbar navbar-expand-lg   border-bottom"> <button class="navbar-toggler"
                 type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span
                     class="navbar-toggler-icon"></span> </button>
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">

@@ -63,7 +63,6 @@ class WorkingDay extends Component
         $this->resetErrorBag();
         $this->resetValidation();
         $this->reset(['name']);
-        $this->emitTO( 'working-day','render');
         $this->emit('alert', 'Registro creada sastifactoriamente');
     }
 
@@ -79,6 +78,7 @@ class WorkingDay extends Component
         $workingday->update([
             'name' => $this->name,
         ]);
+        $this->reset(['name']);
         $this->emit('update');
         $this->resetErrorBag();
         $this->resetValidation();

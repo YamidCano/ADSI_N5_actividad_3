@@ -26,4 +26,4 @@ Route::get('/Instructores', Instructors::class)->name('Instructores');
 Route::get('/Jornadas', WorkingDay::class)->name('Jornadas');
 Route::get('/Fichas', Fichas::class)->name('Fichas');
 Route::get('/', Registrations::class)->name('Registros');
-Route::get('/detail', DetailRegistration::class)->name('detail-registro');
+Route::get('/detail/{detailid}', DetailRegistration::class)->name('detail.registro');

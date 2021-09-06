@@ -52,11 +52,6 @@ class Apprentices extends Component
         return view('livewire.apprentices', compact('apprentices'));
     }
 
-    // public function updatingSearch()
-    // {
-    //     $this->resetPage();
-    // }
-
     public function updatingPerPage()
     {
         $this->resetPage();
@@ -80,7 +75,6 @@ class Apprentices extends Component
         $this->resetErrorBag();
         $this->resetValidation();
         $this->reset(['name', 'email', 'cel', 'ndocumento', 'ficha' ]);
-        $this->emitTO( 'apprentice','render');
         $this->emit('alert', 'Registro creada sastifactoriamente');
     }
 
@@ -107,6 +101,7 @@ class Apprentices extends Component
             'id_ficha' => intVal($this->ficha),
         ]);
         $this->emit('update');
+        $this->reset(['name', 'email', 'cel', 'ndocumento', 'ficha' ]);
         $this->resetErrorBag();
         $this->resetValidation();
         $this->emit('alert', 'Registro Actualizada sastifactoriamente');

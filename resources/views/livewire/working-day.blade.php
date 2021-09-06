@@ -2,7 +2,7 @@
     <div class="d-flex bd-highlight">
         <div class="p-2 bd-highlight">
             <button type="button" class="btn btn-primary mt-3 mb-3" data-toggle="modal" data-target="#Store">
-                Crear Instructor
+                Crear Jornada
             </button>
         </div>
         <div class="ml-auto p-2 bd-highlight">

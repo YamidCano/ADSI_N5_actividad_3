@@ -40,11 +40,6 @@ class Fichas extends Component
         return view('livewire.fichas', compact('fichas'));
     }
 
-    // public function updatingSearch()
-    // {
-    //     $this->resetPage();
-    // }
-
     public function updatingPerPage()
     {
         $this->resetPage();
@@ -64,8 +59,7 @@ class Fichas extends Component
         $this->emit('Store');
         $this->resetErrorBag();
         $this->resetValidation();
-        $this->reset(['name', 'code', ]);
-        $this->emitTO( 'instructor','render');
+        $this->reset(['name', 'code']);
         $this->emit('alert', 'Registro creada sastifactoriamente');
     }
 
@@ -83,6 +77,7 @@ class Fichas extends Component
             'name' => $this->name,
             'code' => $this->code,
         ]);
+        $this->reset(['name', 'code']);
         $this->emit('update');
         $this->resetErrorBag();
         $this->resetValidation();

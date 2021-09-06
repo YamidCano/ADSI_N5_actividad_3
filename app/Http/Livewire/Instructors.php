@@ -41,11 +41,6 @@ class Instructors extends Component
         return view('livewire.instructors', compact('instructors'));
     }
 
-    // public function updatingSearch()
-    // {
-    //     $this->resetPage();
-    // }
-
     public function updatingPerPage()
     {
         $this->resetPage();
@@ -67,7 +62,6 @@ class Instructors extends Component
         $this->resetErrorBag();
         $this->resetValidation();
         $this->reset(['name', 'email', 'cel' ]);
-        $this->emitTO( 'instructor','render');
         $this->emit('alert', 'Registro creada sastifactoriamente');
     }
 
@@ -87,6 +81,7 @@ class Instructors extends Component
             'email' => $this->email,
             'cel' => $this->cel,
         ]);
+        $this->reset(['name', 'email', 'cel' ]);
         $this->emit('update');
         $this->resetErrorBag();
         $this->resetValidation();
