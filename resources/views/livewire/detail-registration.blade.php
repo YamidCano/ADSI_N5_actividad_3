@@ -32,7 +32,7 @@
                     Ficha: {{ $registration_fc }} - {{ $registration_fn }}
                 </div>
                 <div class="col-sm">
-                    Monitor:{{ $registration_m }}
+                    Monitor: {{ $registration_m }}
                 </div>
                 <div class="col-sm">
                     Jornada: {{ $registration_j }}
@@ -43,7 +43,7 @@
                     Instructor: {{ $registration_i }}
                 </div>
                 <div class="col-sm">
-                    Monitor:{{ $registration_d }}
+                    Fecha: {{ $registration_d }}
                 </div>
                 <div class="col-sm">
                     Estado: @if ($registration_s == 0)

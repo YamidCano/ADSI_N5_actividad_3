@@ -122,7 +122,7 @@
                                     class="text-danger error">{{ $message }}</span>@enderror
                             </div>
                             <div class="col-lg mg-t-10 mg-lg-t-0">
-                                <label for="Name">Ficha *</label>
+                                <label for="Name">Jornada *</label>
                                 <select class="custom-select" id="inputGroupSelect01" wire:model="jornada">
                                     <option selected>Selecione una Opcion</option>
                                     @foreach ($workingdays as $item)
@@ -215,7 +215,7 @@
                                     class="text-danger error">{{ $message }}</span>@enderror
                             </div>
                             <div class="col-lg mg-t-10 mg-lg-t-0">
-                                <label for="Name">Ficha *</label>
+                                <label for="Name">Jornada *</label>
                                 <select class="custom-select" id="inputGroupSelect01" wire:model="jornada">
                                     <option selected>Selecione una Opcion</option>
                                     @foreach ($workingdays as $item)
