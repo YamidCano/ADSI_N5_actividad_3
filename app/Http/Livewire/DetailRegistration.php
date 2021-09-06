@@ -8,12 +8,14 @@ use App\Models\apprentice;
 use App\Models\ficha;
 use App\Models\instructor;
 use App\Models\working_day;
+use App\Models\detail_registration;
 
 class DetailRegistration extends Component
 {
     public $registration_id, $registration_m, $registration_fn, $registration_fc, $registration_d, $registration_i, $registration_j, $registration_s;
     public $registration_fid, $search;
     public $detailid;
+    protected $listeners = ['agregarApprentices'];
 
     public function mount($detailid)
     {
@@ -44,5 +46,19 @@ class DetailRegistration extends Component
         $apprentices = apprentice::all();
 
         return view('livewire.detail-registration', compact('apprentices', 'aprendices_f'));
+    }
+
+    public function agregarApprentices($idaprendiz)
+    {
+        detail_registration::create([
+            'id_registro' => $this->detailid,
+            'id_aprendiz' => $idaprendiz,
+        ]);
+    }
+
+    public function cerrar(){
+        $this->emit('update');
+        $this->resetErrorBag();
+        $this->resetValidation();
     }
 }

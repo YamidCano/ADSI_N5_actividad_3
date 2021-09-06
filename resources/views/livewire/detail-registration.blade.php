@@ -6,7 +6,8 @@
             </button>
         </div>
         <div class="ml-auto p-2 bd-highlight">
-            <input class="form-control mr-sm-2 mt-2 mb-2" type="search" wire:model="search" placeholder="Buscar por nombre" aria-label="Search">
+            <input class="form-control mr-sm-2 mt-2 mb-2" type="search" wire:model="search"
+                placeholder="Buscar por nombre" aria-label="Search">
         </div>
     </div>
     <div class="card">
@@ -63,7 +64,8 @@
                     @endif
                 </div>
             </div>
-            <table class="table table-bordered table-striped table-hover card-table table-vcenter text-nowrap text-center">
+            <table
+                class="table table-bordered table-striped table-hover card-table table-vcenter text-nowrap text-center">
                 <thead>
                     <tr>
                         <th class="p-2" scope="col">No.</th>
@@ -78,25 +80,25 @@
                 <tbody>
                     @foreach ($apprentices as $item)
                         <tr>
-                            <td class="p-2" >
+                            <td class="p-2">
                                 #
                             </td>
-                            <td class="p-2" >
+                            <td class="p-2">
                                 {{ $item->id }}
                             </td>
-                            <td class="p-2" >
+                            <td class="p-2">
                                 {{ $item->name }}
                             </td>
-                            <td class="p-2" >
+                            <td class="p-2">
                                 {{ $item->email }}
                             </td>
-                            <td class="p-2" >
+                            <td class="p-2">
                                 {{ $item->cel }}
                             </td>
-                            <td class="p-2" >
+                            <td class="p-2">
                                 {{ $item->ndocumento }}
                             </td>
-                            <td class="p-2" >
+                            <td class="p-2">
                                 <div class="btn-group">
 
                                 </div>
@@ -107,7 +109,6 @@
             </table>
         </div>
     </div>
-</div>
 
     <!-- Modal  Crear-->
     <div wire:ignore.self class="modal fade" id="Store" data-backdrop="static" data-keyboard="false" tabindex="-1"
@@ -124,7 +125,8 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-bordered table-striped table-hover card-table table-vcenter text-nowrap text-center">
+                    <table
+                        class="table table-bordered table-striped table-hover card-table table-vcenter text-nowrap text-center">
                         <thead>
                             <tr>
                                 <th class="p-2" scope="col">nombre</th>
@@ -137,21 +139,24 @@
                         <tbody>
                             @foreach ($aprendices_f as $item)
                                 <tr>
-                                    <td class="p-2" >
+                                    <td class="p-2">
                                         {{ $item->name }}
                                     </td>
-                                    <td class="p-2" >
+                                    <td class="p-2">
                                         {{ $item->email }}
                                     </td>
-                                    <td class="p-2" >
+                                    <td class="p-2">
                                         {{ $item->cel }}
                                     </td>
-                                    <td class="p-2" >
+                                    <td class="p-2">
                                         {{ $item->ndocumento }}
                                     </td>
-                                    <td class="p-2" >
+                                    <td class="p-2">
                                         <div class="btn-group">
-
+                                            <button type="button" class="btn btn-success"
+                                                wire:click="$emit('remove', {{ $item->id }})">
+                                                Agregar
+                                            </button>
                                         </div>
                                     </td>
                                 </tr>
@@ -163,12 +168,34 @@
                     <button type="button" class="btn btn-danger" wire:click="cerrar" data-dismiss="modal">
                         Salir
                     </button>
-                    {{-- <button type="button" class="btn btn-success" wire:click="save" wire:loading.attr="disabled"
-                        wire:target="save" class="dasabled:opacity-25">
-                        Crear <span wire:loading wire:target="save">{{ __('...') }}</span>
-                    </button> --}}
                 </div>
             </div>
         </div>
     </div>
+
+    @push('js')
+    <script type="text/javascript">
+        Livewire.on('remove', ID => {
+            Swal.fire({
+                title: '¿Estas seguro de Agrgar el Aprendiz?',
+                text: "",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, agregar!',
+                cancelButtonText: 'No, cancelar!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.emitTo('detail-registration', 'agregarApprentices', ID)
+                    Swal.fire(
+                        'Agregado!',
+                        'Su registro ha agregado Exitoxamente.',
+                        'success'
+                    )
+                }
+            })
+        });
+    </script>
+@endpush
 </div>
