@@ -12,7 +12,7 @@
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-striped table-hover card-table table-vcenter text-nowrap">
+                <table class="table text-center table-striped table-hover card-table table-vcenter text-nowrap">
                     <thead>
                         <tr>
                             <th scope="col">id</th>
@@ -28,7 +28,18 @@
                         @foreach ($registrations as $item)
                             <tr>
                                 <td>
-                                    {{ $item->id }}
+                                    <div class="text-center">
+                                        {{ $item->id }}
+                                        @if ($item->status == 0)
+                                            <div class="bg-success text-white">
+                                                Abierto
+                                            </div>
+                                        @else
+                                            <div class="bg-danger text-white">
+                                                Cerrado
+                                            </div>
+                                        @endif
+                                    </div>
                                 </td>
                                 <td>
                                     {{ $item->monitor->name }}

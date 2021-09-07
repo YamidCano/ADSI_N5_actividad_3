@@ -18,14 +18,14 @@ class DetailRegistration extends Component
     public $registration_id, $registration_m, $registration_fn, $registration_fc, $registration_d, $registration_i, $registration_j, $registration_s;
     public $registration_fid, $search;
     public $detailid;
-    protected $listeners = ['agregarApprentices', 'removeApprentices'];
+    protected $listeners = ['agregarApprentices', 'removeApprentices', 'CerrarRegistre'];
 
     public function mount($detailid)
     {
         $this->detailid = $detailid;
 
         $Registration = registration::find($detailid);
-        $this->registration_id = $Registration->id;
+        $this->registration_id = $Registration->id_registro;
         $apprentice = apprentice::find($Registration->id_monitor);
         $this->registration_m = $apprentice->name;
         $ficha = ficha::find($Registration->id_ficha);
@@ -73,7 +73,18 @@ class DetailRegistration extends Component
     public function cerrar()
     {
         $this->emit('update');
+        $this->reset(['search']);
         $this->resetErrorBag();
         $this->resetValidation();
+    }
+
+    public function CerrarRegistre(){
+        if ($update = registration::find($this->detailid)) {
+            $update->status = 1;
+            $update->save();
+        }
+        $this->reset(['search']);
+        $this->emit('alert', 'Registro cerrada exitosamente.');
+        return redirect()->route('detail.registro', [$this->detailid]);
     }
 }

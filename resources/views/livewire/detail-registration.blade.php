@@ -1,14 +1,22 @@
 <div>
     <div class="d-flex bd-highlight">
-        <div class="p-2 bd-highlight">
-            <button type="button" class="btn btn-primary mt-2 mb-2" data-toggle="modal" data-target="#Store">
-                Agregar Aprendiz
-            </button>
-        </div>
-        {{-- <div class="ml-auto p-2 bd-highlight">
-            <input class="form-control mr-sm-2 mt-2 mb-2" type="search" wire:model="search"
-                placeholder="Buscar por nombre" aria-label="Search">
-        </div> --}}
+        @if ($this->registration_s == 0)
+            <div class="p-2 bd-highlight">
+                <button type="button" class="btn btn-primary mt-2 mb-2" data-toggle="modal" data-target="#Store">
+                    Agregar Aprendiz
+                </button>
+            </div>
+            <div class="ml-auto p-2 bd-highlight">
+                <button type="button" class="btn btn-danger mt-2 mb-2"
+                    wire:click="$emit('cerrar', {{ $registration_id }})">
+                    Cerrar
+                </button>
+            </div>
+        @else
+            <div class="text-danger h5">
+                Registro Cerrado
+            </div>
+        @endif
     </div>
     <div class="card">
         <div class="card-body">
@@ -72,7 +80,10 @@
                         <th class="p-2" scope="col">correo</th>
                         <th class="p-2" scope="col">celular</th>
                         <th class="p-2" scope="col">N Documento</th>
+                        @if ($this->registration_s == 0)
                         <th></th>
+                        @endif
+
                     </tr>
                 </thead>
                 <tbody>
@@ -90,16 +101,18 @@
                             <td class="p-2">
                                 {{ $item->aprendiz->ndocumento }}
                             </td>
-                            <td class="p-2">
-                                <div class="btn-group">
+                            @if ($this->registration_s == 0)
+                                <td class="p-2">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-danger"
-                                            wire:click="$emit('remove', {{ $item->id }})">
-                                            X
-                                        </button>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-danger"
+                                                wire:click="$emit('remove', {{ $item->id }})">
+                                                X
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
+                                </td>
+                            @endif
                         </tr>
                     @endforeach
                 </tbody>
@@ -115,7 +128,7 @@
             <div class="modal-content card">
                 <div class="modal-header">
                     <h5 class="mt-3 modal-title h4" id="Store">
-                        Listado Aprendice ficha - {{ $registration_fc }} - {{ $registration_fn }}
+                        Listado Aprendice Ficha - {{ $registration_fn }} ('{{ $registration_fc }}')
                     </h5>
                     <button type="button" class="close" data-dismiss="modal" wire:click="cerrar"
                         aria-label="Close">
@@ -184,49 +197,70 @@
     </div>
 
     @push('js')
-    <script type="text/javascript">
-        Livewire.on('agregar', ID => {
-            Swal.fire({
-                title: '¿Estas seguro de Agrgar el Aprendiz?',
-                text: "",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Si, agregar!',
-                cancelButtonText: 'No, cancelar!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Livewire.emitTo('detail-registration', 'agregarApprentices', ID)
-                    Swal.fire(
-                        'Agregado!',
-                        'Su registro ha agregado Exitoxamente.',
-                        'success'
-                    )
-                }
-            })
-        });
-        Livewire.on('remove', ID => {
-            Swal.fire({
-                title: '¿Estas seguro de eliminar el Aprendiz?',
-                text: "",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Si, Eliminar!',
-                cancelButtonText: 'No, cancelar!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Livewire.emitTo('detail-registration', 'removeApprentices', ID)
-                    Swal.fire(
-                        'Agregado!',
-                        'Su registro ha eliminado Exitoxamente.',
-                        'success'
-                    )
-                }
-            })
-        });
-    </script>
-@endpush
+        <script type="text/javascript">
+            Livewire.on('agregar', ID => {
+                Swal.fire({
+                    title: '¿Estas seguro de Agrgar el Aprendiz?',
+                    text: "",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si, agregar!',
+                    cancelButtonText: 'No, cancelar!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Livewire.emitTo('detail-registration', 'agregarApprentices', ID)
+                        Swal.fire(
+                            'Agregado!',
+                            'Su registro ha agregado Exitoxamente.',
+                            'success'
+                        )
+                    }
+                })
+            });
+            Livewire.on('remove', ID => {
+                Swal.fire({
+                    title: '¿Estas seguro de eliminar el Aprendiz?',
+                    text: "",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si, Eliminar!',
+                    cancelButtonText: 'No, cancelar!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Livewire.emitTo('detail-registration', 'removeApprentices', ID)
+                        Swal.fire(
+                            'Agregado!',
+                            'Su registro ha eliminado Exitoxamente.',
+                            'success'
+                        )
+                    }
+                })
+            });
+            Livewire.on('cerrar', ID => {
+                Swal.fire({
+                    title: '¿Estas seguro de cerrar el registro?',
+                    text: "No podras hacer cambios despues",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Si, Cerrar!',
+                    cancelButtonText: 'No, cancelar!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        Livewire.emitTo('detail-registration', 'CerrarRegistre', ID)
+                        Swal.fire(
+                            'Cerrado!',
+                            'Su registro ha Cerrado Exitoxamente.',
+                            'success'
+                        )
+                    }
+                })
+            });
+        </script>
+    @endpush
 </div>
