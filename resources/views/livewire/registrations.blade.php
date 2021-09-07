@@ -15,7 +15,7 @@
                 <table class="table text-center table-striped table-hover card-table table-vcenter text-nowrap">
                     <thead>
                         <tr>
-                            <th scope="col">id</th>
+                            <th scope="col">Estado</th>
                             <th scope="col">Monitor</th>
                             <th scope="col">ficha</th>
                             <th scope="col">Instructor</th>
@@ -29,7 +29,6 @@
                             <tr>
                                 <td>
                                     <div class="text-center">
-                                        {{ $item->id }}
                                         @if ($item->status == 0)
                                             <div class="bg-success text-white">
                                                 Abierto
@@ -62,11 +61,14 @@
                                             href="{{ route('detail.registro', $item->id) }}">
                                             Ver
                                         </a>
-                                        <button type="button" class="btn btn-primary mr-2 ml-2"
-                                            wire:click="edit({{ $item->id }})" wire:target="edit"
-                                            data-toggle="modal" data-target="#update">
-                                            Editar
-                                        </button>
+                                        @if ($item->status == 0)
+                                            <button type="button" class="btn btn-primary mr-2 ml-2"
+                                                wire:click="edit({{ $item->id }})" wire:target="edit"
+                                                data-toggle="modal" data-target="#update">
+                                                Editar
+                                            </button>
+                                        @endif
+
                                     </div>
                                 </td>
                             </tr>

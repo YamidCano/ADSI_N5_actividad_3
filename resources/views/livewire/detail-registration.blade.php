@@ -81,7 +81,7 @@
                         <th class="p-2" scope="col">celular</th>
                         <th class="p-2" scope="col">N Documento</th>
                         @if ($this->registration_s == 0)
-                        <th></th>
+                            <th></th>
                         @endif
 
                     </tr>
@@ -211,11 +211,21 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         Livewire.emitTo('detail-registration', 'agregarApprentices', ID)
-                        Swal.fire(
-                            'Agregado!',
-                            'Su registro ha agregado Exitoxamente.',
-                            'success'
-                        )
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        })
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Su registro ha agregado exitoxamente.'
+                        })
                     }
                 })
             });
@@ -232,11 +242,21 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         Livewire.emitTo('detail-registration', 'removeApprentices', ID)
-                        Swal.fire(
-                            'Agregado!',
-                            'Su registro ha eliminado Exitoxamente.',
-                            'success'
-                        )
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                            }
+                        })
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Su registro ha eliminado exitoxamente.'
+                        })
                     }
                 })
             });
