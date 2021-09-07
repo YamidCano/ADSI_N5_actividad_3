@@ -5,10 +5,10 @@
                 Agregar Aprendiz
             </button>
         </div>
-        <div class="ml-auto p-2 bd-highlight">
+        {{-- <div class="ml-auto p-2 bd-highlight">
             <input class="form-control mr-sm-2 mt-2 mb-2" type="search" wire:model="search"
                 placeholder="Buscar por nombre" aria-label="Search">
-        </div>
+        </div> --}}
     </div>
     <div class="card">
         <div class="card-body">
@@ -68,8 +68,6 @@
                 class="table table-bordered table-striped table-hover card-table table-vcenter text-nowrap text-center">
                 <thead>
                     <tr>
-                        <th class="p-2" scope="col">No.</th>
-                        <th class="p-2" scope="col">id</th>
                         <th class="p-2" scope="col">nombre</th>
                         <th class="p-2" scope="col">correo</th>
                         <th class="p-2" scope="col">celular</th>
@@ -78,35 +76,35 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($apprentices as $item)
+                    @foreach ($detailregistrations as $item)
                         <tr>
                             <td class="p-2">
-                                #
+                                {{ $item->aprendiz->name }}
                             </td>
                             <td class="p-2">
-                                {{ $item->id }}
+                                {{ $item->aprendiz->email }}
                             </td>
                             <td class="p-2">
-                                {{ $item->name }}
+                                {{ $item->aprendiz->cel }}
                             </td>
                             <td class="p-2">
-                                {{ $item->email }}
-                            </td>
-                            <td class="p-2">
-                                {{ $item->cel }}
-                            </td>
-                            <td class="p-2">
-                                {{ $item->ndocumento }}
+                                {{ $item->aprendiz->ndocumento }}
                             </td>
                             <td class="p-2">
                                 <div class="btn-group">
-
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-danger"
+                                            wire:click="$emit('remove', {{ $item->id }})">
+                                            X
+                                        </button>
+                                    </div>
                                 </div>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+            {{ $detailregistrations->links() }}
         </div>
     </div>
 
@@ -125,6 +123,17 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    <div class="d-flex bd-highlight">
+                        {{-- <div class="p-2 bd-highlight">
+                            <button type="button" class="btn btn-primary mt-2 mb-2" data-toggle="modal" data-target="#Store">
+                                Agregar Aprendiz
+                            </button>
+                        </div> --}}
+                        <div class="ml-auto p-2 bd-highlight">
+                            <input class="form-control mr-sm-2 mt-2 mb-2" type="search" wire:model="search"
+                                placeholder="Buscar por nombre" aria-label="Search">
+                        </div>
+                    </div>
                     <table
                         class="table table-bordered table-striped table-hover card-table table-vcenter text-nowrap text-center">
                         <thead>
@@ -154,7 +163,7 @@
                                     <td class="p-2">
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-success"
-                                                wire:click="$emit('remove', {{ $item->id }})">
+                                                wire:click="$emit('agregar', {{ $item->id }})">
                                                 Agregar
                                             </button>
                                         </div>
@@ -164,6 +173,7 @@
                         </tbody>
                     </table>
                 </div>
+                {{ $aprendices_f->links() }}
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" wire:click="cerrar" data-dismiss="modal">
                         Salir
@@ -175,7 +185,7 @@
 
     @push('js')
     <script type="text/javascript">
-        Livewire.on('remove', ID => {
+        Livewire.on('agregar', ID => {
             Swal.fire({
                 title: '¿Estas seguro de Agrgar el Aprendiz?',
                 text: "",
@@ -191,6 +201,27 @@
                     Swal.fire(
                         'Agregado!',
                         'Su registro ha agregado Exitoxamente.',
+                        'success'
+                    )
+                }
+            })
+        });
+        Livewire.on('remove', ID => {
+            Swal.fire({
+                title: '¿Estas seguro de eliminar el Aprendiz?',
+                text: "",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, Eliminar!',
+                cancelButtonText: 'No, cancelar!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Livewire.emitTo('detail-registration', 'removeApprentices', ID)
+                    Swal.fire(
+                        'Agregado!',
+                        'Su registro ha eliminado Exitoxamente.',
                         'success'
                     )
                 }

@@ -42,9 +42,6 @@ class Apprentices extends Component
 
     public function render()
     {
-
-
-
         $apprentices = apprentice::query()
         ->where('name', 'like', "%{$this->search}%")
         ->paginate($this->perPage);

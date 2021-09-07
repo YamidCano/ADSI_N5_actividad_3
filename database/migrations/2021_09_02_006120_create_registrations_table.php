@@ -19,7 +19,6 @@ class CreateRegistrationsTable extends Migration
             $table->foreign('id_monitor')->references('id')->on('apprentices');
             $table->unsignedBigInteger('id_ficha')->nullable();
             $table->foreign('id_ficha')->references('id')->on('fichas');
-            $table->string('ficha')->nullable();
             $table->unsignedBigInteger('id_instructor')->nullable();
             $table->foreign('id_instructor')->references('id')->on('instructors');
             $table->date('date')->nullable();
