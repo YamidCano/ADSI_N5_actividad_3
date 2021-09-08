@@ -10,6 +10,7 @@ use App\Models\instructor;
 use App\Models\working_day;
 use App\Models\detail_registration;
 use Livewire\WithPagination;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class DetailRegistration extends Component
 {
@@ -55,6 +56,10 @@ class DetailRegistration extends Component
             ->paginate(5);
 
         return view('livewire.detail-registration', compact('detailregistrations', 'aprendices_f'));
+    }
+
+    public function pdf(){
+
     }
 
     public function agregarApprentices($idaprendiz)

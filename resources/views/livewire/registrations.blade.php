@@ -41,6 +41,7 @@
                                     </div>
                                 </td>
                                 <td>
+                                    {{ $item->status }}
                                     {{ $item->monitor->name }}
                                 </td>
                                 <td>
